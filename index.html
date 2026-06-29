@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>餐廳手機掃碼點餐系統</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1 id="restaurantName">幸福餐廳</h1>
+      <p id="tableLabel">桌號載入中...</p>
+    </div>
+    <button class="ghost" onclick="location.href='admin.html'">後台</button>
+  </header>
+
+  <main>
+    <section class="notice">
+      <strong>手機掃碼點餐</strong>
+      <span>選擇餐點後送出，廚房後台即可看到訂單。</span>
+    </section>
+
+    <nav id="categoryTabs" class="tabs"></nav>
+    <section id="menuList" class="menu-list"></section>
+  </main>
+
+  <aside class="cart-panel" id="cartPanel">
+    <div class="cart-head">
+      <h2>購物車</h2>
+      <button class="ghost" onclick="toggleCart(false)">關閉</button>
+    </div>
+    <div id="cartItems" class="cart-items"></div>
+    <div class="cart-total">
+      <span>合計</span><strong id="cartTotal">NT$0</strong>
+    </div>
+    <textarea id="orderNote" placeholder="備註：少冰、不要蔥、餐具需求..."></textarea>
+    <button class="primary full" onclick="submitOrder()">送出訂單</button>
+  </aside>
+
+  <button class="floating-cart" onclick="toggleCart(true)">
+    查看購物車 <span id="cartCount">0</span>
+  </button>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

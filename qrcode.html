@@ -1,0 +1,8 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>桌號 QR</title><link rel="stylesheet" href="assets/styles.css"></head><body>
+<div class="admin-layout"><aside class="sidebar"><h2>餐廳後台</h2><a href="admin.html">訂單看板</a><a href="menu.html">菜單管理</a><a class="active" href="qrcode.html">桌號 QR</a><a href="index.html?table=A01">顧客頁</a></aside><main class="admin-main"><section class="panel"><h1>桌號 QR 產生器</h1><p>輸入網址後可產生各桌點餐連結。正式上線後，將網址換成您的網站網域。</p><input id="baseUrl"><button class="primary" onclick="renderQR()" style="margin-top:10px">產生桌號連結</button></section><section id="qrGrid" class="qr-grid"></section></main></div>
+<script>
+const tables=['A01','A02','A03','A04','A05','A06','B01','B02','B03','B04'];
+baseUrl.value=location.origin+location.pathname.replace('qrcode.html','index.html');
+function renderQR(){qrGrid.innerHTML=tables.map(t=>{const url=baseUrl.value+'?table='+t;return `<div class="qr-card"><h3>${t}</h3><div class="qr-box">請用線上 QR 工具或瀏覽器外掛產生<br>${url}</div><p><a href="${url}">開啟點餐頁</a></p></div>`}).join('')}
+renderQR();
+</script></body></html>

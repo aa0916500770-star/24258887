@@ -1,0 +1,6 @@
+const store={get orders(){return JSON.parse(localStorage.getItem('orders')||'[]')},set orders(v){localStorage.setItem('orders',JSON.stringify(v))}};
+function money(n){return 'NT$'+Number(n).toLocaleString('zh-TW')}
+function setStatus(id,status){const orders=store.orders; const o=orders.find(x=>x.id===id); if(o)o.status=status; store.orders=orders; renderOrders();}
+function removeOrder(id){ if(confirm('確定刪除此訂單？')){store.orders=store.orders.filter(x=>x.id!==id); renderOrders();}}
+function renderOrders(){const box=document.getElementById('orders'); const orders=store.orders; box.innerHTML=orders.length?orders.map(o=>`<article class="order-card"><div class="row"><h3>桌號 ${o.table}</h3><span class="badge">${o.status}</span></div><p>${o.time}</p><ul>${o.items.map(i=>`<li>${i.name} × ${i.qty}｜${money(i.price*i.qty)}</li>`).join('')}</ul>${o.note?`<p><strong>備註：</strong>${o.note}</p>`:''}<div class="row"><strong>${money(o.total)}</strong></div><div class="row" style="margin-top:12px"><button class="primary" onclick="setStatus('${o.id}','製作中')">製作中</button><button class="primary" onclick="setStatus('${o.id}','已完成')">完成</button><button class="primary danger" onclick="removeOrder('${o.id}')">刪除</button></div></article>`).join(''):'<div class="panel"><p>目前沒有訂單。</p></div>'}
+renderOrders(); setInterval(renderOrders,3000);
